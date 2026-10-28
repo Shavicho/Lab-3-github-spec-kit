@@ -1,50 +1,87 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+<!--
+Sync Impact Report
+Version change: sin versión previa -> 1.0.0 (adopción inicial)
+Principles added: Código limpio y modular; Pruebas obligatorias; Experiencia de usuario clara;
+	API pública y protección de datos; Manejo robusto de errores; Alcance mínimo;
+	Documentación y commits claros.
+Sections added: Restricciones del producto; Flujo de desarrollo.
+Sections removed: Ninguna.
+Follow-up TODOs: Confirmar fecha original de ratificación.
+-->
+# Conversor de monedas Constitution
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### I. Código limpio y modular
+El código MUST ser legible y modular. Las funciones MUST tener una responsabilidad
+acotada y nombres claros; la lógica de conversión MUST mantenerse separada de la
+interfaz y del acceso a la API. Esto facilita probar y mantener cada parte sin
+introducir complejidad accidental.
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+### II. Pruebas básicas obligatorias
+Cada cambio MUST incluir pruebas automatizadas para la lógica de conversión y el
+manejo de errores que modifica. Las pruebas MUST cubrir conversiones válidas y,
+como mínimo, entradas inválidas y fallos o respuestas no utilizables de la API.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+### III. Experiencia de usuario clara
+La aplicación MUST ofrecer una experiencia simple, clara y responsiva. Las etiquetas
+y los mensajes de error visibles MUST estar en español y explicar el problema en
+términos comprensibles, sin exponer detalles técnicos o datos sensibles.
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+### IV. API pública y protección de datos
+La obtención de tasas MUST usar exclusivamente una API pública y gratuita. El
+repositorio MUST NOT contener claves, credenciales ni datos sensibles; cualquier
+secreto requerido por el proveedor MUST mantenerse fuera del código y del control
+de versiones. La aplicación MUST solicitar solo los datos necesarios para realizar
+la conversión.
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+### V. Manejo robusto de errores
+La aplicación MUST gestionar de forma explícita la caída o indisponibilidad de la
+API, la falta de conexión, las entradas inválidas y las respuestas inesperadas o
+malformadas. Ante estos casos MUST informar al usuario en español y evitar presentar
+un resultado de conversión que no pueda verificarse.
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+### VI. Alcance mínimo
+La implementación MUST limitarse a convertir una cantidad entre dos monedas usando
+tasas de cambio. MUST NOT incorporar funcionalidades fuera de ese alcance, incluidos
+inicio de sesión y base de datos, salvo que una enmienda a esta constitución lo
+autorice.
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+### VII. Documentación y commits claros
+El README MUST documentar de forma concisa el propósito y los pasos esenciales para
+ejecutar o probar la aplicación. Cada commit MUST describir claramente el cambio que
+introduce, para que el historial permita entender su propósito.
 
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
+## Restricciones del producto
 
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+La aplicación MUST usar tasas obtenidas de la API pública y gratuita elegida por el
+proyecto. MUST comunicar los errores de red, proveedor o datos al usuario sin
+convertirlos en resultados aparentemente válidos. No se almacenarán cuentas ni datos
+de usuario en una base de datos.
+
+## Flujo de desarrollo
+
+Los cambios MUST incluir pruebas para la lógica de conversión y los errores afectados.
+Antes de integrar un cambio, la revisión MUST confirmar que respeta los siete
+principios, que el README sigue siendo suficiente y que no se han añadido secretos,
+dependencias de pago ni funcionalidades fuera de alcance. Los commits MUST tener
+mensajes descriptivos.
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+Esta constitución define los requisitos obligatorios del proyecto. Toda enmienda
+MUST documentar su motivo y alcance, recibir revisión de las personas responsables
+del proyecto y actualizar la versión y la fecha de última modificación. Las
+modificaciones de gobernanza MUST preservar esta estructura y explicar cualquier
+cambio incompatible.
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+La versión MUST seguir SemVer: MAJOR para cambios incompatibles o eliminación de
+requisitos; MINOR para principios o secciones nuevos o una ampliación material; y
+PATCH para aclaraciones y correcciones sin cambio de significado.
+
+Cada revisión de cambios y cada preparación de entrega MUST comprobar el cumplimiento
+de estos principios, en especial las pruebas, el manejo de errores, la protección de
+secretos y el límite de alcance. Las excepciones requieren una enmienda aprobada a
+esta constitución.
+
+**Version**: 1.0.0 | **Ratified**: TODO(RATIFICATION_DATE): confirmar fecha original | **Last Amended**: 2026-10-28
