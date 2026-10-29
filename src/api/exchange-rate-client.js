@@ -22,9 +22,7 @@ export class ExchangeRateClient {
   }
 
   async getCurrencies() {
-    const url = new URL(`${this.baseUrl}/currencies`);
-    url.searchParams.set('_', String(Date.now()));
-    const response = await this.#request(url.toString());
+    const response = await this.#request(`${this.baseUrl}/currencies`);
     const currencies = await this.#readJson(response);
 
     if (

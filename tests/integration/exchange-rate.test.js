@@ -25,8 +25,9 @@ describe('Frankfurter exchange rate client', () => {
     const client = new ExchangeRateClient({ fetchImpl });
 
     await expect(client.getCurrencies()).resolves.toEqual(currencyResponse);
-    expect(fetchImpl.mock.calls[0][0]).toMatch(
-      /^https:\/\/api\.frankfurter\.app\/currencies\?_=\d+$/,
+    expect(fetchImpl).toHaveBeenCalledWith(
+      'https://api.frankfurter.app/currencies',
+      expect.any(Object),
     );
     expect(fetchImpl.mock.calls[0][1]).toEqual({
       headers: { Accept: 'application/json' },
