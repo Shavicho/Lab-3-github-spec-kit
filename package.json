@@ -1,0 +1,22 @@
+{
+  "name": "conversor-de-monedas",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:e2e": "playwright test --project=chromium --project=firefox --project=edge",
+    "test:performance": "playwright test --project=performance"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.56.1",
+    "ajv": "^8.17.1",
+    "jsdom": "^26.1.0",
+    "vite": "^7.1.12",
+    "vitest": "^4.1.12"
+  }
+}
