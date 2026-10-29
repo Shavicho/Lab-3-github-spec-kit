@@ -12,9 +12,9 @@ Use the single source layout in [plan.md](./plan.md). The canonical conversion-r
 
 **Purpose**: Configure the static web application and its automated test tooling.
 
-- [ ] T001 Create `package.json` with `"type": "module"`, development dependencies `vite`, `vitest`, `jsdom`, `ajv`, and `@playwright/test`, and scripts `dev`, `build`, `preview`, `test`, `test:watch`, `test:e2e`, and `test:performance`
-- [ ] T002 Configure `vitest.config.js` with jsdom and test discovery for `tests/unit/**/*.test.js`, `tests/integration/**/*.test.js`, and `tests/contract/**/*.test.js`
-- [ ] T003 Configure `playwright.config.js` with Chromium, Firefox, and Edge (Microsoft Edge channel) projects for `tests/e2e/`, a Chromium-only project for `tests/performance/`, local `baseURL`, and Vite `webServer`
+- [X] T001 Create `package.json` with `"type": "module"`, development dependencies `vite`, `vitest`, `jsdom`, `ajv`, and `@playwright/test`, and scripts `dev`, `build`, `preview`, `test`, `test:watch`, `test:e2e`, and `test:performance`
+- [X] T002 Configure `vitest.config.js` with jsdom and test discovery for `tests/unit/**/*.test.js`, `tests/integration/**/*.test.js`, and `tests/contract/**/*.test.js`
+- [X] T003 Configure `playwright.config.js` with Chromium, Firefox, and Edge (Microsoft Edge channel) projects for `tests/e2e/`, a Chromium-only project for `tests/performance/`, local `baseURL`, and Vite `webServer`
 
 ---
 
@@ -22,7 +22,7 @@ Use the single source layout in [plan.md](./plan.md). The canonical conversion-r
 
 **Purpose**: Create the shared static app shell required by every user story.
 
-- [ ] T004 Create `index.html` with the accessible converter form shell, ES module entry point, and initially hidden loading, error, and result regions consumed by `src/ui/form.js`
+- [X] T004 Create `index.html` with the accessible converter form shell, ES module entry point, and initially hidden loading, error, and result regions consumed by `src/ui/form.js`
 
 **Checkpoint**: Test commands and shared document shell are available before story implementation.
 
@@ -36,18 +36,18 @@ Use the single source layout in [plan.md](./plan.md). The canonical conversion-r
 
 ### Tests for User Story 1
 
-- [ ] T005 [P] [US1] Add AJV 2020 contract tests for valid and invalid result objects in `tests/contract/conversion-result.test.js`, loading `specs/001-currency-conversion/contracts/conversion-result.schema.json`
-- [ ] T006 [P] [US1] Add unit tests for rate multiplication, destination currency fraction digits, rounding, and same-currency identity conversion in `tests/unit/conversion.test.js`
-- [ ] T007 [P] [US1] Add deterministic mocked-fetch integration tests for supported currencies and a successful latest-rate response in `tests/integration/exchange-rate.test.js`
-- [ ] T008 [P] [US1] Add Playwright tests for valid conversion, same-currency conversion, currency swapping, date-only provider-date presentation, and a deferred rate response that asserts the loading indicator is visible until resolution in `tests/e2e/conversion-flow.spec.js`
+- [X] T005 [P] [US1] Add AJV 2020 contract tests for valid and invalid result objects in `tests/contract/conversion-result.test.js`, loading `specs/001-currency-conversion/contracts/conversion-result.schema.json`
+- [X] T006 [P] [US1] Add unit tests for rate multiplication, destination currency fraction digits, rounding, and same-currency identity conversion in `tests/unit/conversion.test.js`
+- [X] T007 [P] [US1] Add deterministic mocked-fetch integration tests for supported currencies and a successful latest-rate response in `tests/integration/exchange-rate.test.js`
+- [X] T008 [P] [US1] Add Playwright tests for valid conversion, same-currency conversion, currency swapping, date-only provider-date presentation, and a deferred rate response that asserts the loading indicator is visible until resolution in `tests/e2e/conversion-flow.spec.js`
 
 ### Implementation for User Story 1
 
-- [ ] T009 [P] [US1] Implement Frankfurter `GET /currencies` and `GET /latest?from={fromCurrency}&to={toCurrency}` successful-response handling in `src/api/exchange-rate-client.js`
-- [ ] T010 [P] [US1] Implement rate-based calculation, destination-currency rounding, and no-request identity conversion in `src/utils/conversion.js`
-- [ ] T011 [US1] Implement the accessible amount field, currency selectors, submit action, swap action, and status regions in `src/ui/form.js`
-- [ ] T012 [US1] Coordinate submit, API lookup, conversion, and success rendering in `src/app/currency-converter.js`; produce data conforming to the canonical result contract without duplicating its schema
-- [ ] T013 [P] [US1] Implement responsive layout and visible loading, success, and error styles in `styles.css`
+- [X] T009 [P] [US1] Implement Frankfurter `GET /currencies` and `GET /latest?from={fromCurrency}&to={toCurrency}` successful-response handling in `src/api/exchange-rate-client.js`
+- [X] T010 [P] [US1] Implement rate-based calculation, destination-currency rounding, and no-request identity conversion in `src/utils/conversion.js`
+- [X] T011 [US1] Implement the accessible amount field, currency selectors, submit action, swap action, and status regions in `src/ui/form.js`
+- [X] T012 [US1] Coordinate submit, API lookup, conversion, and success rendering in `src/app/currency-converter.js`; produce data conforming to the canonical result contract without duplicating its schema
+- [X] T013 [P] [US1] Implement responsive layout and visible loading, success, and error styles in `styles.css`
 
 **Checkpoint**: US1 works independently with a valid provider response and satisfies the same-currency behavior.
 
@@ -61,12 +61,12 @@ Use the single source layout in [plan.md](./plan.md). The canonical conversion-r
 
 ### Tests for User Story 2
 
-- [ ] T014 [P] [US2] Add unit tests for empty, non-numeric, non-finite, negative, comma-decimal, period-decimal, and multiple-separator amounts in `tests/unit/validation.test.js`
+- [X] T014 [P] [US2] Add unit tests for empty, non-numeric, non-finite, negative, comma-decimal, period-decimal, and multiple-separator amounts in `tests/unit/validation.test.js`
 
 ### Implementation for User Story 2
 
-- [ ] T015 [US2] Implement amount parsing and validation in `src/utils/validation.js`, accepting one comma or one period as decimal separator and rejecting grouping separators, non-finite values, and negatives
-- [ ] T016 [US2] Connect validation errors to Spanish form feedback and clear prior results before handling a new submission in `src/app/currency-converter.js` and `src/ui/form.js`
+- [X] T015 [US2] Implement amount parsing and validation in `src/utils/validation.js`, accepting one comma or one period as decimal separator and rejecting grouping separators, non-finite values, and negatives
+- [X] T016 [US2] Connect validation errors to Spanish form feedback and clear prior results before handling a new submission in `src/app/currency-converter.js` and `src/ui/form.js`
 
 **Checkpoint**: Invalid input never triggers a rate request or displays a conversion result.
 
@@ -80,13 +80,13 @@ Use the single source layout in [plan.md](./plan.md). The canonical conversion-r
 
 ### Tests for User Story 3
 
-- [ ] T017 [P] [US3] Add mocked-fetch tests for network, HTTP, malformed JSON, unsupported currency, missing rate, and invalid rate cases in `tests/integration/exchange-rate.test.js`
-- [ ] T018 [P] [US3] Add Playwright failure-state tests in `tests/e2e/conversion-flow.spec.js` that assert Spanish feedback and a hidden result for failed provider requests in Chromium, Firefox, and Edge
+- [X] T017 [P] [US3] Add mocked-fetch tests for network, HTTP, malformed JSON, unsupported currency, missing rate, and invalid rate cases in `tests/integration/exchange-rate.test.js`
+- [X] T018 [P] [US3] Add Playwright failure-state tests in `tests/e2e/conversion-flow.spec.js` that assert Spanish feedback and a hidden result for failed provider requests in Chromium, Firefox, and Edge
 
 ### Implementation for User Story 3
 
-- [ ] T019 [US3] Map network, HTTP, JSON, base-currency, unsupported-currency, missing-rate, and invalid-rate failures to explicit domain errors in `src/api/exchange-rate-client.js`
-- [ ] T020 [US3] Render clear Spanish failure messages and keep the result hidden for every failed conversion in `src/app/currency-converter.js` and `src/ui/form.js`
+- [X] T019 [US3] Map network, HTTP, JSON, base-currency, unsupported-currency, missing-rate, and invalid-rate failures to explicit domain errors in `src/api/exchange-rate-client.js`
+- [X] T020 [US3] Render clear Spanish failure messages and keep the result hidden for every failed conversion in `src/app/currency-converter.js` and `src/ui/form.js`
 
 **Checkpoint**: Failed requests and unusable rates cannot appear to users as successful conversions.
 
@@ -96,11 +96,13 @@ Use the single source layout in [plan.md](./plan.md). The canonical conversion-r
 
 **Purpose**: Verify latency, usability, documentation, and the complete automated suite.
 
-- [ ] T021 [P] Implement a live-provider Playwright latency test in `tests/performance/conversion-latency.spec.js` that collects 20 successful sequential conversions, measures each duration from API-query initiation until the conversion result is visible on screen, records the environment and test conditions, and passes only if at least 19 of 20 durations are below 3000 ms
-- [ ] T022 Run `npm run test:performance` in stable network conditions without deliberate throttling or interruptions. Apply this criterion: En condiciones de red estables, realizar 20 conversiones exitosas; medir cada una desde el inicio de la consulta a la API hasta que el resultado de conversión se muestra en pantalla; al menos 19 de las 20 deben terminar en menos de 3000 ms. Registrar el entorno y las condiciones de la prueba. Record sample durations in `specs/001-currency-conversion/quickstart.md`; mark the run inconclusive if 20 successful conversions cannot be obtained
+- [X] T021 [P] Implement a live-provider Playwright latency test in `tests/performance/conversion-latency.spec.js` that collects 20 successful sequential conversions, measures each duration from API-query initiation until the conversion result is visible on screen, records the environment and test conditions, and passes only if at least 19 of 20 durations are below 3000 ms
+- [X] T022 Run `npm run test:performance` in stable network conditions without deliberate throttling or interruptions. Apply this criterion: En condiciones de red estables, realizar 20 conversiones exitosas; medir cada una desde el inicio de la consulta a la API hasta que el resultado de conversión se muestra en pantalla; al menos 19 de las 20 deben terminar en menos de 3000 ms. Registrar el entorno y las condiciones de la prueba. Record sample durations in `specs/001-currency-conversion/quickstart.md`; mark the run inconclusive if 20 successful conversions cannot be obtained
 - [ ] T023 Conduct the CE-001 usability test with 10 first-time participants using the prompt “Convert 100 USD to EUR”; record anonymized completion count and times in `specs/001-currency-conversion/quickstart.md` and verify at least 9 finish within 60 seconds
-- [ ] T024 [P] Document purpose, prerequisites, and essential run/build/test commands in `README.md`
-- [ ] T025 Run `npm test`, `npm run test:e2e`, and `npm run build`; resolve failures in affected files and verify contract compliance and that failures never render a result
+- [X] T024 [P] Document purpose, prerequisites, and essential run/build/test commands in `README.md`
+- [X] T025 Run `npm test`, `npm run test:e2e`, and `npm run build`; resolve failures in affected files and verify contract compliance and that failures never render a result
+
+T023 remains pending because it requires a moderated study with 10 real first-time participants; no participant data or completion times were fabricated.
 
 ---
 

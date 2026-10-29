@@ -48,6 +48,13 @@ CE-002: En condiciones de red estables, realizar 20 conversiones exitosas; medir
 
 El test abre la app en Chromium y obtiene las 20 conversiones exitosas secuenciales contra Frankfurter real. Si Frankfurter o la red impiden completar las 20 conversiones exitosas, marcar la ejecución como inconclusa; no sustituir resultados fallidos por tasas simuladas. La comprobación de compatibilidad funcional de Firefox y Edge se realiza con `npm run test:e2e`.
 
+### Ejecución registrada (2026-10-29)
+
+- **Entorno**: Windows, Node.js 24.18.0, Playwright 1.64.1, Chromium 156.0.8078.4.
+- **Condiciones**: sin throttling ni interrupciones deliberadas; ejecución desde `http://127.0.0.1:5173`.
+- **Resultado**: inconcluso, 0 de 20 conversiones medidas. Chromium informó que la respuesta real de `https://api.frankfurter.app/currencies` no incluía `Access-Control-Allow-Origin` para el origen local (`net::ERR_FAILED`). El endpoint sí respondió HTTP 200 desde el runtime de Node, pero el navegador bloqueó la respuesta por CORS.
+- **Duraciones**: no hay muestras; no se evalúa el umbral de 19/20 bajo 3000 ms. No se sustituyeron respuestas reales por datos simulados.
+
 ## Usabilidad (CE-001)
 
 Realizar una prueba moderada con 10 participantes que no hayan usado la app:
@@ -58,3 +65,5 @@ Realizar una prueba moderada con 10 participantes que no hayan usado la app:
 4. El criterio se cumple si al menos 9 de los 10 participantes terminan en menos de 60 segundos.
 
 Registrar fecha, dispositivo/navegador, número de éxitos y tiempos (sin información personal) como evidencia de la validación. Esta es una evaluación con participantes, no una prueba automatizada.
+
+**Estado de esta implementación (2026-10-29)**: pendiente de ejecutar con 10 participantes reales. No se registraron participantes ni tiempos, por lo que CE-001 no se considera validado.
