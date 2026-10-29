@@ -22,7 +22,9 @@ export class ExchangeRateClient {
   }
 
   async getCurrencies() {
-    const response = await this.#request(`${this.baseUrl}/currencies`);
+    const url = new URL(`${this.baseUrl}/currencies`);
+    url.searchParams.set('_', String(Date.now()));
+    const response = await this.#request(url.toString());
     const currencies = await this.#readJson(response);
 
     if (
@@ -107,7 +109,6 @@ export class ExchangeRateClient {
     let response;
     try {
       response = await this.fetchImpl(url, {
-        cache: 'no-store',
         headers: { Accept: 'application/json' },
       });
     } catch {

@@ -8,7 +8,7 @@ const currencies = {
 const corsHeaders = { 'access-control-allow-origin': '*' };
 
 async function openConverter(page) {
-  await page.route('https://api.frankfurter.app/currencies', (route) =>
+  await page.route('https://api.frankfurter.app/currencies**', (route) =>
     route.fulfill({ json: currencies, headers: corsHeaders }),
   );
   await page.goto('/');
