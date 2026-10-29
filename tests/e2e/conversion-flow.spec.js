@@ -8,7 +8,7 @@ const currencies = {
 const corsHeaders = { 'access-control-allow-origin': '*' };
 
 async function openConverter(page) {
-  await page.route('https://api.frankfurter.app/currencies**', (route) =>
+  await page.route('https://api.frankfurter.dev/v1/currencies**', (route) =>
     route.fulfill({ json: currencies, headers: corsHeaders }),
   );
   await page.goto('/');
@@ -25,7 +25,7 @@ test('converts an amount and displays the reference date without a time', async 
   page,
 }) => {
   await openConverter(page);
-  await page.route('https://api.frankfurter.app/latest?**', (route) =>
+  await page.route('https://api.frankfurter.dev/v1/latest?**', (route) =>
     route.fulfill({
       json: {
         amount: 1,
@@ -55,7 +55,7 @@ test('returns the original amount for identical currencies without requesting a 
 }) => {
   await openConverter(page);
   let rateRequested = false;
-  await page.route('https://api.frankfurter.app/latest?**', (route) => {
+  await page.route('https://api.frankfurter.dev/v1/latest?**', (route) => {
     rateRequested = true;
     return route.fulfill({
       json: { amount: 1, base: 'EUR', rates: { EUR: 1 } },
@@ -91,7 +91,7 @@ test('keeps the loading indicator visible until the rate response resolves', asy
   const pendingResponse = new Promise((resolve) => {
     resolveRate = resolve;
   });
-  await page.route('https://api.frankfurter.app/latest?**', async (route) => {
+  await page.route('https://api.frankfurter.dev/v1/latest?**', async (route) => {
     await pendingResponse;
     await route.fulfill({
       json: {
@@ -120,7 +120,7 @@ test('shows Spanish feedback and hides the result when the provider fails', asyn
   page,
 }) => {
   await openConverter(page);
-  await page.route('https://api.frankfurter.app/latest?**', (route) =>
+  await page.route('https://api.frankfurter.dev/v1/latest?**', (route) =>
     route.fulfill({
       status: 503,
       json: { message: 'unavailable' },
@@ -140,7 +140,7 @@ test('shows Spanish feedback and hides the result when the provider fails', asyn
 test('rejects invalid amounts before querying the provider', async ({ page }) => {
   await openConverter(page);
   let rateRequested = false;
-  await page.route('https://api.frankfurter.app/latest?**', (route) => {
+  await page.route('https://api.frankfurter.dev/v1/latest?**', (route) => {
     rateRequested = true;
     return route.fulfill({
       json: { base: 'USD', rates: { EUR: 0.92 } },
@@ -158,7 +158,7 @@ test('rejects invalid amounts before querying the provider', async ({ page }) =>
 
 test('keeps a failed network request out of the result region', async ({ page }) => {
   await openConverter(page);
-  await page.route('https://api.frankfurter.app/latest?**', (route) =>
+  await page.route('https://api.frankfurter.dev/v1/latest?**', (route) =>
     route.abort(),
   );
   await page.getByLabel('Moneda de origen').selectOption('USD');
@@ -175,7 +175,7 @@ test('shows an error and hides the result for malformed or unusable rates', asyn
   page,
 }) => {
   await openConverter(page);
-  await page.route('https://api.frankfurter.app/latest?**', (route) =>
+  await page.route('https://api.frankfurter.dev/v1/latest?**', (route) =>
     route.fulfill({
       status: 200,
       contentType: 'application/json',
@@ -197,7 +197,7 @@ test('shows an error and hides the result when the requested rate is missing', a
   page,
 }) => {
   await openConverter(page);
-  await page.route('https://api.frankfurter.app/latest?**', (route) =>
+  await page.route('https://api.frankfurter.dev/v1/latest?**', (route) =>
     route.fulfill({
       json: { amount: 1, base: 'USD', rates: {} },
       headers: corsHeaders,
@@ -217,7 +217,7 @@ test('shows an error and hides the result when the provider rate is invalid', as
   page,
 }) => {
   await openConverter(page);
-  await page.route('https://api.frankfurter.app/latest?**', (route) =>
+  await page.route('https://api.frankfurter.dev/v1/latest?**', (route) =>
     route.fulfill({
       json: { amount: 1, base: 'USD', rates: { EUR: -1 } },
       headers: corsHeaders,

@@ -12,7 +12,7 @@ Aplicación web estática de una sola pantalla, construida con HTML, CSS y JavaS
 
 **Language/Version**: HTML5, CSS3 y JavaScript ES2022 (módulos ES) en navegadores modernos.
 
-**Primary Dependencies**: Frankfurter (`https://api.frankfurter.app`) para monedas y tasas; `fetch` nativo para HTTP; Vite para servir y generar el sitio estático; Vitest y jsdom para pruebas unitarias/de integración; AJV para validar el contrato JSON; Playwright Test para la verificación de extremo a extremo y rendimiento real del navegador.
+**Primary Dependencies**: Frankfurter (`https://api.frankfurter.dev/v1`) para monedas y tasas; `fetch` nativo para HTTP; Vite para servir y generar el sitio estático; Vitest y jsdom para pruebas unitarias/de integración; AJV para validar el contrato JSON; Playwright Test para la verificación de extremo a extremo y rendimiento real del navegador.
 
 **Storage**: Ninguno. No se almacenan cuentas, solicitudes ni resultados.
 
@@ -44,7 +44,7 @@ Aplicación web estática de una sola pantalla, construida con HTML, CSS y JavaS
 
 ### Monedas y proveedor
 
-La lista del selector se obtiene de `GET /currencies`. Para monedas distintas, se consulta `GET /latest?from={fromCurrency}&to={toCurrency}`. La respuesta se acepta solo si contiene una tasa numérica, finita y positiva para la moneda destino y una base coherente con la solicitud. Para monedas iguales no se consulta al proveedor; el resultado usa tasa identidad `1` y marca `rateSource` como `identity`.
+La lista del selector se obtiene de `GET /v1/currencies`. Para monedas distintas, se consulta `GET /v1/latest?from={fromCurrency}&to={toCurrency}`. La respuesta se acepta solo si contiene una tasa numérica, finita y positiva para la moneda destino y una base coherente con la solicitud. Para monedas iguales no se consulta al proveedor; el resultado usa tasa identidad `1` y marca `rateSource` como `identity`.
 
 El campo `date` de Frankfurter representa la fecha de referencia de las tasas (no una hora de observación exacta). Se mapeará a `observationDate`; no se fabricará un timestamp ni se presentará la fecha como hora local.
 

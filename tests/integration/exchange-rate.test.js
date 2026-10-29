@@ -26,7 +26,7 @@ describe('Frankfurter exchange rate client', () => {
 
     await expect(client.getCurrencies()).resolves.toEqual(currencyResponse);
     expect(fetchImpl).toHaveBeenCalledWith(
-      'https://api.frankfurter.app/currencies',
+      'https://api.frankfurter.dev/v1/currencies',
       expect.any(Object),
     );
     expect(fetchImpl.mock.calls[0][1]).toEqual({
@@ -50,7 +50,7 @@ describe('Frankfurter exchange rate client', () => {
       observationDate: '2026-10-28',
     });
     expect(fetchImpl).toHaveBeenCalledWith(
-      'https://api.frankfurter.app/latest?from=USD&to=EUR',
+      'https://api.frankfurter.dev/v1/latest?from=USD&to=EUR',
       expect.any(Object),
     );
   });

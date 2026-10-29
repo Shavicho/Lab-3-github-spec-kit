@@ -10,7 +10,7 @@ test('at least 19 of 20 live conversions appear within three seconds', async ({
     window.fetch = (input, init) => {
       const requestUrl =
         input instanceof Request ? input.url : new URL(input, location.href).href;
-      if (requestUrl.startsWith('https://api.frankfurter.app/latest')) {
+      if (requestUrl.startsWith('https://api.frankfurter.dev/v1/latest')) {
         performance.mark('frankfurter-query-start');
       }
       return originalFetch(input, init);
@@ -56,12 +56,10 @@ test('at least 19 of 20 live conversions appear within three seconds', async ({
     try {
       await expect(page.locator('#result')).toBeVisible({ timeout: 12_000 });
     } catch {
-      const reason = `Inconcluso: solo se completaron ${durations.length} de 20 conversiones reales; ${failedRequests.join('; ')}`;
+      const errorMessage = await page.locator('#error').textContent();
+      const reason = `Inconcluso: solo se completaron ${durations.length} de 20 conversiones reales. Mensaje de la interfaz: ${errorMessage}. ${failedRequests.join('; ')}`;
       console.warn(reason);
-      test.skip(
-        true,
-        reason,
-      );
+      test.skip(true, reason);
     }
 
     const duration = await page.evaluate(() => {

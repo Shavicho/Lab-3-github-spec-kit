@@ -1,4 +1,4 @@
-const API_BASE_URL = 'https://api.frankfurter.app';
+const API_BASE_URL = 'https://api.frankfurter.dev/v1';
 
 export class ExchangeRateError extends Error {
   constructor(code, message) {

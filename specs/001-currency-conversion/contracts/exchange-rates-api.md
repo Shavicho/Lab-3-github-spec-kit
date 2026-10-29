@@ -2,19 +2,19 @@
 
 ## Proveedor
 
-Frankfurter: `https://api.frankfurter.app`. API pública y gratuita; no requiere clave.
+Frankfurter: `https://api.frankfurter.dev/v1`. API pública y gratuita; no requiere clave. Se usa la API v1, cuyo formato es compatible con el contrato JSON descrito aquí.
 
 ## Divisas soportadas
 
-`GET /currencies`
+`GET /v1/currencies`
 
 Devuelve un objeto JSON cuyas claves son códigos de divisa ISO y cuyos valores son nombres legibles. La aplicación usa esas claves para las opciones de ambos selectores. Un fallo HTTP, de red o de JSON impide completar la carga de divisas y se comunica en español.
 
 ## Tasa de cambio
 
-`GET /latest?from={fromCurrency}&to={toCurrency}`
+`GET /v1/latest?from={fromCurrency}&to={toCurrency}`
 
-Ejemplo: `GET https://api.frankfurter.app/latest?from=USD&to=EUR`
+Ejemplo: `GET https://api.frankfurter.dev/v1/latest?from=USD&to=EUR`
 
 Respuesta esperada:
 

@@ -43,7 +43,7 @@ Use the single source layout in [plan.md](./plan.md). The canonical conversion-r
 
 ### Implementation for User Story 1
 
-- [X] T009 [P] [US1] Implement Frankfurter `GET /currencies` and `GET /latest?from={fromCurrency}&to={toCurrency}` successful-response handling in `src/api/exchange-rate-client.js`
+- [X] T009 [P] [US1] Implement Frankfurter `GET /v1/currencies` and `GET /v1/latest?from={fromCurrency}&to={toCurrency}` successful-response handling in `src/api/exchange-rate-client.js`
 - [X] T010 [P] [US1] Implement rate-based calculation, destination-currency rounding, and no-request identity conversion in `src/utils/conversion.js`
 - [X] T011 [US1] Implement the accessible amount field, currency selectors, submit action, swap action, and status regions in `src/ui/form.js`
 - [X] T012 [US1] Coordinate submit, API lookup, conversion, and success rendering in `src/app/currency-converter.js`; produce data conforming to the canonical result contract without duplicating its schema

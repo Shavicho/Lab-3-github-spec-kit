@@ -52,8 +52,17 @@ El test abre la app en Chromium y obtiene las 20 conversiones exitosas secuencia
 
 - **Entorno**: Windows, Node.js 24.18.0, Playwright 1.64.1, Chromium 156.0.8078.4.
 - **Condiciones**: sin throttling ni interrupciones deliberadas; ejecución desde `http://127.0.0.1:5173`.
-- **Resultado**: inconcluso, 0 de 20 conversiones medidas. Chromium informó que la respuesta real de `https://api.frankfurter.app/currencies` no incluía `Access-Control-Allow-Origin` para el origen local (`net::ERR_FAILED`). El endpoint sí respondió HTTP 200 desde el runtime de Node, pero el navegador bloqueó la respuesta por CORS.
-- **Duraciones**: no hay muestras; no se evalúa el umbral de 19/20 bajo 3000 ms. No se sustituyeron respuestas reales por datos simulados.
+- **Resultado inicial**: inconcluso, 0 de 20 conversiones medidas. Chromium informó que la respuesta real de `https://api.frankfurter.app/currencies` no incluía `Access-Control-Allow-Origin` para el origen local (`net::ERR_FAILED`). El endpoint sí respondió HTTP 200 desde el runtime de Node, pero el navegador bloqueó la respuesta por CORS.
+- **Corrección**: se cambió al endpoint oficial compatible `https://api.frankfurter.dev/v1`; las solicitudes reales de `/v1/currencies` y `/v1/latest?from=USD&to=EUR` respondieron correctamente en Chromium.
+- **Resultado final**: 20 de 20 conversiones exitosas; las 20 se mostraron en menos de 3000 ms. CE-002 aprobado.
+- **Duraciones (ms)**: 324.7, 76.3, 52.7, 43.0, 49.3, 35.2, 35.2, 51.8, 56.1, 62.2, 48.4, 35.8, 40.9, 39.0, 45.7, 40.7, 46.9, 42.8, 36.3, 33.1.
+
+### Ejecución adicional informada por el usuario (2026-10-29)
+
+- **Entorno**: Windows, Node.js 24.18.0, Chromium. La versión de Playwright no se indicó.
+- **Condiciones**: Frankfurter en vivo; sin throttling ni interrupciones deliberadas.
+- **Resultado**: 20 de 20 conversiones exitosas; las 20 se mostraron en menos de 3000 ms. CE-002 aprobado.
+- **Duraciones (ms)**: 397.2, 40.1, 39.2, 33.7, 38.4, 33.6, 40.0, 33.9, 34.4, 49.9, 35.2, 37.1, 35.3, 33.3, 46.9, 42.7, 32.4, 35.6, 41.0, 32.4.
 
 ## Usabilidad (CE-001)
 

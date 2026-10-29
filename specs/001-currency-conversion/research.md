@@ -2,7 +2,7 @@
 
 ## Fuente de tasas
 
-**Decisión**: Usar Frankfurter (`https://api.frankfurter.app`), sin clave, con `GET /currencies` para poblar los selectores y `GET /latest?from={base}&to={symbols}` para una conversión.
+**Decisión**: Usar Frankfurter (`https://api.frankfurter.dev/v1`), sin clave, con `GET /v1/currencies` para poblar los selectores y `GET /v1/latest?from={base}&to={symbols}` para una conversión. La API v1 conserva el formato de respuesta usado por la aplicación y evita el bloqueo CORS observado en el dominio anterior `api.frankfurter.app`.
 
 **Justificación**: Cumple el requisito de API pública y gratuita sin credenciales; proporciona una estructura JSON directa para comprobar la moneda base, tasa y fecha de referencia.
 
