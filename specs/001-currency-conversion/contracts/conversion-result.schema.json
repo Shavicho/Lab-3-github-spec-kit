@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "conversion-result.schema.json",
+  "title": "ConversionResult",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "originalAmount",
+    "fromCurrency",
+    "toCurrency",
+    "exchangeRate",
+    "convertedAmount",
+    "observationDate",
+    "rateSource"
+  ],
+  "properties": {
+    "originalAmount": {
+      "type": "number",
+      "minimum": 0
+    },
+    "fromCurrency": {
+      "type": "string",
+      "pattern": "^[A-Z]{3}$"
+    },
+    "toCurrency": {
+      "type": "string",
+      "pattern": "^[A-Z]{3}$"
+    },
+    "exchangeRate": {
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
+    "convertedAmount": {
+      "type": "number",
+      "minimum": 0
+    },
+    "observationDate": {
+      "type": ["string", "null"],
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "rateSource": {
+      "type": "string",
+      "enum": ["frankfurter", "identity"]
+    }
+  }
+}

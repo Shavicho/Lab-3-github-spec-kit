@@ -23,7 +23,7 @@ Como persona que necesita comparar dinero en distintas monedas, puedo introducir
 1. **Dado** un importe válido y monedas de origen y destino compatibles, **cuando** el usuario solicita una conversión, **entonces** la aplicación muestra el importe convertido con la moneda de destino.
 2. **Dadas** la misma moneda de origen y de destino y una cantidad válida, **cuando** el usuario solicita una conversión, **entonces** la aplicación devuelve la cantidad introducida sin modificarla.
 3. **Dada** una conversión exitosa, **cuando** se muestra el resultado, **entonces** el importe de origen, ambas monedas y el tipo de cambio utilizado son claros para el usuario.
-4. **Dado** que la fuente de tasas proporciona la hora de observación del tipo de cambio, **cuando** se muestra el resultado, **entonces** la aplicación muestra esa hora.
+4. **Dado** que la fuente de tasas proporciona la fecha de referencia del tipo de cambio, **cuando** se muestra el resultado, **entonces** la aplicación muestra esa fecha y no infiere ni inventa una hora.
 
 ### Historia de usuario 2: Corregir una cantidad no válida (Prioridad: P2)
 
@@ -73,7 +73,7 @@ Como persona que solicita una conversión, recibo un aviso cuando la informació
 - **RF-007**: Si las monedas de origen y destino son iguales, la aplicación DEBE devolver la cantidad introducida sin consultar un tipo de cambio.
 - **RF-008**: La aplicación DEBE mostrar mensajes de error comprensibles en español para entradas no válidas, datos de tasas no disponibles, monedas no compatibles y respuestas fallidas o no utilizables de la fuente de tasas.
 - **RF-009**: La aplicación NO DEBE mostrar un resultado de conversión cuando la cantidad no sea válida o no se pueda verificar el tipo de cambio necesario.
-- **RF-010**: La aplicación DEBE indicar cuándo se obtuvo el tipo de cambio, si la fuente de tasas proporciona esa información.
+- **RF-010**: La aplicación DEBE mostrar la fecha de referencia del tipo de cambio que proporciona la fuente, si está disponible. La aplicación NO DEBE inferir ni inventar una hora exacta a partir de una fecha.
 - **RF-011**: La aplicación DEBE permitir intercambiar las monedas de origen y destino con un solo clic.
 
 ### Requisitos no funcionales
@@ -88,7 +88,7 @@ Como persona que solicita una conversión, recibo un aviso cuando la informació
 ### Entidades clave *(incluir si la funcionalidad involucra datos)*
 
 - **Solicitud de conversión**: La cantidad introducida por el usuario y las monedas de origen y destino seleccionadas.
-- **Tipo de cambio**: El valor que relaciona una moneda compatible con otra, incluida su fuente y cualquier hora de observación disponible.
+- **Tipo de cambio**: El valor que relaciona una moneda compatible con otra, incluida su fuente y la fecha de referencia que proporcione.
 - **Resultado de conversión**: La cantidad calculada en la moneda de destino, asociada con la solicitud y el tipo de cambio utilizado.
 
 ## Criterios de éxito *(obligatorio)*
@@ -96,7 +96,7 @@ Como persona que solicita una conversión, recibo un aviso cuando la informació
 ### Resultados medibles
 
 - **CE-001**: Al menos 9 de cada 10 usuarios que utilizan la aplicación por primera vez pueden completar una conversión con datos válidos en menos de un minuto.
-- **CE-002**: Cuando la fuente de tasas responde correctamente y la red funciona en condiciones normales, el 95 % de los resultados de conversión se muestran en menos de 3 segundos desde la solicitud del usuario.
+- **CE-002**: En condiciones de red estables, realizar 20 conversiones exitosas; medir cada una desde el inicio de la consulta a la API hasta que el resultado de conversión se muestra en pantalla; al menos 19 de las 20 deben terminar en menos de 3000 ms. Registrar el entorno y las condiciones de la prueba.
 - **CE-003**: En todos los escenarios probados de entrada no válida o tasa no disponible, la aplicación muestra una explicación en español y no presenta un resultado de conversión sin verificar.
 - **CE-004**: En todas las conversiones exitosas probadas, el resultado mostrado coincide con las monedas seleccionadas y el tipo de cambio, redondeado a la precisión fraccionaria habitual de la moneda de destino.
 
